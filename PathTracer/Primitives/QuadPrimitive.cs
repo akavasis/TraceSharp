@@ -1,5 +1,6 @@
 ﻿using PathTracer.Math;
 using PathTracer.Rendering;
+using System.DoubleNumerics;
 
 namespace PathTracer.Primitives
 {
@@ -79,7 +80,7 @@ namespace PathTracer.Primitives
             Vector3 tempTopLeft     = TopLeft;
 
             // Calculate the normal vector
-            Vector3 normal = Vector3.Cross(tempTopRight - tempBottomLeft, tempTopRight - tempBottomRight).Normalized;
+            Vector3 normal = Vector3.Normalize(Vector3.Cross(tempTopRight - tempBottomLeft, tempTopRight - tempBottomRight));
 
             // Flip vertex order if needed
             if (Vector3.Dot(normal, ray.Direction) > 0.0d)

@@ -8,6 +8,7 @@ using PathTracer.Math;
 using PathTracer.Primitives;
 using System.Threading;
 using System.Linq;
+using System.DoubleNumerics;
 
 namespace PathTracer.Rendering
 {
@@ -179,7 +180,7 @@ namespace PathTracer.Rendering
                 if (percentage > CurrentRenderPercentage)
                 {
                     // Console read / write operations are thread-safe
-                    Console.WriteLine("[PROGRESS] " + percentage + "%");
+                    Console.Write("\r[PROGRESS] " + percentage + "%");
                     CurrentRenderPercentage = percentage;
                 }
             }
@@ -275,7 +276,7 @@ namespace PathTracer.Rendering
                     v /= aspectRatio;
 
                     // Ray starts at the camera origin and goes through the imaginary pixel rectangle
-                    Ray cameraRay = new Ray(Vector3.Zero, new Vector3(u, v, cameraDistance));
+                    Ray cameraRay = new(Vector3.Zero, new Vector3(u, v, cameraDistance));
 
                     // Simulate light traveling through the scene
                     Color color = TracePixel(cameraRay, randomNumberGenerator);
@@ -338,12 +339,12 @@ namespace PathTracer.Rendering
 
                 // Calculate whether the next ray is going to be a diffuse or specular ray
                 bool useSpecular = (randomNumberGenerator.NextDouble() < closestHitInfo.SurfaceMaterial.Specularness);
-
+                
                 // Diffuse rays use cosine weighted hemisphere samples
                 // Perfect smooth specular uses reflection rays
                 // Anything in between will be linearly interpolated by the roughness squared
                 // Roughness does not need to be squared, but it will help with the overall perception of roughness
-                Vector3 diffuseRayDirection = (closestHitInfo.Normal + Functions.RandomUnitVector(randomNumberGenerator)).Normalized;
+                Vector3 diffuseRayDirection = Vector3.Normalize((closestHitInfo.Normal + Functions.RandomUnitVector(randomNumberGenerator)));
                 Vector3 specularRayDirection = Vector3.Reflect(ray.Direction, closestHitInfo.Normal);
                 specularRayDirection = Vector3.Lerp(specularRayDirection, diffuseRayDirection, closestHitInfo.SurfaceMaterial.Roughness * closestHitInfo.SurfaceMaterial.Roughness);
 

@@ -1,6 +1,7 @@
 ﻿using System;
+using System.DoubleNumerics;
 
-namespace PathTracer.Math
+namespace PathTracer
 {
     static class Functions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
+using System.DoubleNumerics;
 using PathTracer.Math;
 using PathTracer.Primitives;
 using PathTracer.Rendering;

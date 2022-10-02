@@ -1,4 +1,5 @@
 ﻿using PathTracer.Math;
+using System.DoubleNumerics;
 
 namespace PathTracer.Rendering
 {

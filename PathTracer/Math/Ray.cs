@@ -1,4 +1,6 @@
-﻿namespace PathTracer.Math
+﻿using System.DoubleNumerics;
+
+namespace PathTracer.Math
 {
     class Ray
     {
@@ -15,7 +17,7 @@
         public Vector3 Direction
         {
             get => DirectionVector;
-            set => DirectionVector = value.Normalized;
+            set => DirectionVector = Vector3.Normalize(value);
         }
 
         /// <summary>
@@ -35,7 +37,7 @@
         public Ray(Vector3 origin, Vector3 direction)
         {
             Origin          = origin;
-            DirectionVector = direction.Normalized;
+            DirectionVector = Vector3.Normalize(direction);
         }
     }
 }

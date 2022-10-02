@@ -1,5 +1,6 @@
 ﻿using PathTracer.Math;
 using PathTracer.Rendering;
+using System.DoubleNumerics;
 
 namespace PathTracer.Primitives
 {
@@ -85,7 +86,7 @@ namespace PathTracer.Primitives
             if (distance > minHitDistance && distance < maxHitDistance)
             {
                 hitInfo.Distance = distance;
-                hitInfo.Normal = ((ray.Origin + (ray.Direction * distance)) - Center).Normalized * (inside ? -1.0d : 1.0d);
+                hitInfo.Normal = Vector3.Normalize(((ray.Origin + (ray.Direction * distance)) - Center))* (inside ? -1.0d : 1.0d);
                 hitInfo.DidHit = true;
                 return hitInfo;
             }

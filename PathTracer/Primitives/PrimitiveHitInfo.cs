@@ -1,5 +1,6 @@
 ﻿using PathTracer.Math;
 using PathTracer.Rendering;
+using System.DoubleNumerics;
 
 namespace PathTracer.Primitives
 {
